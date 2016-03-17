@@ -1,4 +1,7 @@
 all: ejemplo_udp
 
-ejemplo_udp: ejemplo_udp.c
+comm.o: comm.c
+	gcc -Wall -c $^ -o $@
+
+ejemplo_udp: ejemplo_udp.c comm.o
 	gcc -o $@ $^
