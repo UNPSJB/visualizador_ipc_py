@@ -1,7 +1,13 @@
-all: ejemplo_udp
+# Cambiar los nombres de los procesos
 
-comm.o: comm.c
-	gcc -Wall -c $^ -o $@
+.PHONY: all
 
-ejemplo_udp: ejemplo_udp.c comm.o
+all: prog_a prog_b
+
+# Compilar la librería de comunicaciones con Processing
+comm.o: comm.c comm.h
+	gcc -Wall -c comm.c -o $@
+
+# Compilador genérico de archivos C
+%: %.c comm.o
 	gcc -o $@ $^
