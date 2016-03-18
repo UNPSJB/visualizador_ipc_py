@@ -1,17 +1,17 @@
 import sys
 import socket
 from thread import start_new_thread
-from subprocess import call
+from subprocess import call, check_output, CalledProcessError
 from leer_struct import buscar_estructura
 
 ANCHO = 800
 ALTO = 600
+PUERTO = 2016
 
 TMensaje = buscar_estructura(
     archivo='./c/comm.h',
     nombre='TMensaje'
 )
-print TMensaje
 
 server = None # Equivalente a null
 
@@ -23,7 +23,7 @@ def setup():
     global server
     size(ANCHO, ALTO)
     server = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    server.bind(('0', 2016))
+    server.bind(('0', PUERTO))
     argv=()
     start_new_thread(escuchar, argv)
     noLoop()
@@ -37,13 +37,14 @@ def draw():
 
 
 def escuchar():
-    print "Comenzando a escuchar"
-    while True:
+    print "Comenzando a escuchar en %d" % PUERTO 
+    while server:
         dato_crudo, quien = server.recvfrom(1024)
+        # Para debug descomentar la siguiente línea
         #print "Se recibió", data, "de", quien
         m = TMensaje()
         m.unpack(dato_crudo)
-        #print m.pid, m.x, m.y
+        print m.pid, m.x, m.y
         PROCESOS[m.pid] = {
             "x": m.x,
             "y": m.y,
@@ -53,15 +54,32 @@ def keyPressed():
     print "key pressed", key
     if key == 'm':
         run_make()
-    else:
-        run_prog('./c/ejemplo_udp')
-        
+    elif key == '1':
+        run_prog('./c/prog_a')
+    elif key == '2':
+        run_prog('./c/prog_b')
+    elif key == 'q':
+        exit()
 def run_make():
     print "Ejecutando Make"
-    output = call('make -C ./c', shell=True)
-    print output
+    try:
+        output = check_output('make -C ./c', shell=True)
+    except CalledProcessError as e:
+        print "ERROR", e
+        print e.output
 
 def run_prog(prog):
     def func():
-        call(prog, shell=True)
+        print "Lanznado %s" % prog
+        print call(prog, shell=True)
+        
     start_new_thread(func, tuple())
+    
+def stop():
+    global server
+    print "Cerrando"
+    try:
+        server.close()
+        server = None
+    except:
+        pass
