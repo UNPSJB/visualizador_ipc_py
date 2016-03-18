@@ -8,8 +8,8 @@ int main(int argc, char **argv)
     TMensaje m;
     int count = 10;
 
-    iniciar(argc, argv);
-    
+    iniciar(argc, argv, &m);
+
     while(count-- > 0)
     {
         strncpy(m.msg, "Hola que tal", 80);
