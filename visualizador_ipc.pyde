@@ -7,7 +7,7 @@ from leer_struct import buscar_estructura
 ANCHO = 800
 ALTO = 600
 PUERTO = 2016
-
+import os; print os.getcwd()
 TMensaje = buscar_estructura(
     archivo='./c/comm.h',
     nombre='TMensaje'
@@ -32,23 +32,29 @@ def setup():
 def draw():
     background(0, 0, 0)
     fill(255, 255, 255)
-    rect(10, 10, 10, 10)
-    text("Alfa", 40, 10)
-
+    color(255, 255, 255)
+    
+    for pid, proc in PROCESOS.iteritems():
+        rect(proc.x, proc.y, 100, 100)
+        print (proc.x, proc.y, 100, 100)
+        text(proc.prog_name, proc.x + 10, proc.y +10)
+    
+    print PROCESOS
 
 def escuchar():
     print "Comenzando a escuchar en %d" % PUERTO 
     while server:
         dato_crudo, quien = server.recvfrom(1024)
         # Para debug descomentar la siguiente línea
-        #print "Se recibió", data, "de", quien
+        print "Se recibió", dato_crudo, "de", quien
         m = TMensaje()
         m.unpack(dato_crudo)
-        print m.pid, m.x, m.y
-        PROCESOS[m.pid] = {
-            "x": m.x,
-            "y": m.y,
-        }
+        if m.estado == -1:
+            if m.pid in PROCESOS:
+                PROCESOS.pop(m.pid)
+        # Se actualiza
+        PROCESOS[m.pid] = m
+        draw()
 
 def keyPressed():
     print "key pressed", key
