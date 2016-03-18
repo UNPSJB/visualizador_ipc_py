@@ -11,13 +11,12 @@
 #define PORT 2016
 
 struct sockaddr_in si_other;
-int s, 
-    i, 
-    slen, 
+int s,
+    i,
+    slen,
     id=0 /* Identificado de mensaje */;
 char prog_name[BUFLEN];
-char buf[BUFLEN];
-char message[BUFLEN];
+
 
 void die(char *s)
 {
@@ -30,7 +29,7 @@ void close_socket(void) {
 }
 
 
-void iniciar(int argc, char **argv) {
+void iniciar(int argc, char **argv, TMensaje *m) {
     if (argc) {
         strncpy(prog_name, argv[0], sizeof(prog_name)-1);
     }
@@ -49,12 +48,14 @@ void iniciar(int argc, char **argv) {
         exit(1);
     }
     atexit(close_socket);
+    memset((void *)m, 0, sizeof(TMensaje));
 }
 
 
 void enviar(TMensaje *m) {
     m->pid = getpid();
     m->id = id++;
+    strncpy(m->prog_name, prog_name, sizeof(m->prog_name)-1);
     if (sendto(s, m, sizeof(TMensaje) , 0 , (struct sockaddr *) &si_other, slen)==-1)
     {
         die("sendto()");
