@@ -7,9 +7,11 @@
  */
 typedef struct {
     int pid;
+    int id;
     char msg[80];
     int x;
     int y;
+    int status;
 } TMensaje;
 
 
@@ -17,7 +19,7 @@ typedef struct {
  * Iniciar la comunicación con Processing.
  * Debe ser llamado antes de utilizar enviar.
  */
-void iniciar(void);
+void iniciar(int argc, char **argv);
 /**
  * Enviar un mensaje a Processing
  * @param m mensaje a ser enviado. Este mensaje está definido en el tipo TMensaje que
