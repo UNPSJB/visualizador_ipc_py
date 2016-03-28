@@ -1,5 +1,7 @@
 # Cambiar los nombres de los procesos
 
+BIN_TAIL=$(shell uname -sm | tr '[:upper:]' '[:lower:]' | sed 's/\s/\./')
+
 .PHONY: all
 
 EJECUTABLES=prog_a prog_b
@@ -18,3 +20,6 @@ clean:
 	@rm *.o ${EJECUTABLES}
 
 re: clean all
+
+debug:
+	@echo ${BIN_TAIL}
