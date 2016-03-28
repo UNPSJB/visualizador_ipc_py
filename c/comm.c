@@ -8,7 +8,6 @@
 #include "comm.h"
 #define SERVER "127.0.0.1"
 #define BUFLEN 512
-#define PORT 2016
 
 struct sockaddr_in si_other;
 int s,
@@ -30,7 +29,7 @@ void close_socket(void) {
 
 
 void iniciar(int argc, char **argv, TMensaje *m) {
-    int port;
+    int port = PORT;
     char *port_s = getenv("PORT");
 
     if (port_s != NULL) {
@@ -60,6 +59,7 @@ void iniciar(int argc, char **argv, TMensaje *m) {
     }
     atexit(close_socket);
     memset((void *)m, 0, sizeof(TMensaje));
+    fprintf(stderr, "Puerto UDP: %d", port);
 }
 
 

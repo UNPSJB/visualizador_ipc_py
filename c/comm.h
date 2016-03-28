@@ -1,6 +1,10 @@
 #ifndef _comm_h_
 #define _comm_h_
 
+/*
+Definiciones globales
+ */
+#define PORT 2016
 
 /**
  * Modificar esta estructura para mostrar información útil
