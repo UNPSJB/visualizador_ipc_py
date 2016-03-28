@@ -2,7 +2,9 @@
 
 .PHONY: all
 
-all: prog_a prog_b
+EJECUTABLES=prog_a prog_b
+
+all: ${EJECUTABLES}
 
 # Compilar la librería de comunicaciones con Processing
 comm.o: comm.c comm.h
@@ -11,3 +13,8 @@ comm.o: comm.c comm.h
 # Compilador genérico de archivos C
 %: %.c comm.o
 	gcc -o $@ $^
+
+clean:
+	@rm *.o ${EJECUTABLES}
+
+re: clean all
