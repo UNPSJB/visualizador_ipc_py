@@ -30,6 +30,17 @@ void close_socket(void) {
 
 
 void iniciar(int argc, char **argv, TMensaje *m) {
+    int port;
+    char *port_s = getenv("PORT");
+
+    if (port_s != NULL) {
+        port = atoi(port_s);
+        if (port < 1024 || port > 65000) {
+            port = PORT;
+        }
+        fprintf(stderr, "PORT no se pudo entender. Dejando valor: %d\n", port);
+    }
+
     if (argc) {
         strncpy(prog_name, argv[0], sizeof(prog_name)-1);
     }
@@ -40,7 +51,7 @@ void iniciar(int argc, char **argv, TMensaje *m) {
     }
     memset((char *) &si_other, 0, sizeof(si_other));
     si_other.sin_family = AF_INET;
-    si_other.sin_port = htons(PORT);
+    si_other.sin_port = htons(port);
 
     if (inet_aton(SERVER , &si_other.sin_addr) == 0)
     {
