@@ -1,5 +1,6 @@
 .PHONY: procesos
 
+all: html
 # Compila los procesos para IPC
 procesos:
 	make -C ./c
