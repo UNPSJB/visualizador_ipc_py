@@ -27,7 +27,7 @@ void draw() {
 
 Resultado:
 
-![Processing](img/processing_ej1.png)
+![Processing](imgs/processing_ej1.png)
 
 ## Programas a simular
 
