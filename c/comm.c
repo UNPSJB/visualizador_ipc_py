@@ -1,3 +1,8 @@
+/**
+ * Este archivo se compila como comm.<SO>.<Arquitectura>.o
+ * En linux el binario sería comm.linux.x86_64.o en un procesador de 64bits
+ */
+
 #include <stdio.h> //printf
 #include <string.h> //memset
 #include <stdlib.h> //exit(0) atexit()
