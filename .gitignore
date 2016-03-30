@@ -1,3 +1,4 @@
 c/ejemplo_udp
-c/prog_a
-c/prog_b
+# Binarios
+c/*.linux.*
+c/*.darwin.*
