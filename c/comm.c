@@ -21,20 +21,38 @@ int s,
     id=0 /* Identificado de mensaje */;
 char prog_name[BUFLEN];
 
-
+/**
+ * Cerrar el programa imprimiendo mensaje de error.
+ * @param s [description]
+ */
 void die(char *s)
 {
     perror(s);
     exit(1);
 }
 
+/**
+ * Cierra socket y envía mensaje de finalización con
+ * status = -1 para que processing remueva el elemento de la pantalla.
+ */
 void close_socket(void) {
+    TMensaje m;
+    m.estado = -1;
+    enviar(&m);
     close(s);
 }
 
-
+/**
+ * Inicialización de la biblioteca de comunicación
+ * @param argc Argumento argc de main
+ * @param argv Argumento argv de main
+ * @param m    Mensaje a ser utilizado para comunicación, para realizar comunicación.
+ */
 void iniciar(int argc, char **argv, TMensaje *m) {
     int port = PORT;
+    if (m == NULL) {
+        die("El agumento TMensaje m es nulo.");
+    }
     char *port_s = getenv("PORT");
 
     if (port_s != NULL) {
