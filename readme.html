@@ -87,8 +87,19 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p class="caption">Processing</p>
 </div>
 <h1 id="para-que-sirve-el-modo-python">¿Para que sirve el modo Python?</h1>
-<p>El modo Python simplifica el trabajo con Processing ya que no se requiere definir tipos de variables y aporta una tipo de datos llamado diccionario o <code>dict</code> que es conveniente para tener asociaciones <code>pid: mensaje</code>. Por otro lado existe una biblioteca, <a href="./cstruct.py">incluida en el proyecto</a>, que permite tomar los datos enviados desde C de manera directa.</p>
+<p>El modo Python simplifica el trabajo con Processing ya que no se requiere definir tipos de variables y aporta una tipo de datos llamado diccionario o <code>dict</code> que es conveniente para tener asociaciones <code>pid: mensaje</code>. Por otro lado existe una biblioteca, <a href="./cstruct.py">incluida en el proyecto</a>, que permite tomar los datos enviados desde C de manera directa desde la estructura TMensaje (definida en <a href="c/comm.h" class="uri">c/comm.h</a>).</p>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c"><span class="kw">typedef</span> <span class="kw">struct</span> {
+    <span class="dt">char</span> prog_name[<span class="dv">20</span>];
+    <span class="dt">int</span> pid;
+    <span class="dt">int</span> id;
+    <span class="dt">int</span> estado;
+    <span class="co">/* Información extra */</span>
+    <span class="dt">char</span> msg[<span class="dv">80</span>];
+    <span class="dt">int</span> x;
+    <span class="dt">int</span> y;
+} TMensaje;</code></pre></div>
 <h2 id="cómo-se-instala-el-modo-python-en-processing">¿Cómo se instala el modo Python en Processing?</h2>
+<p>TODO</p>
 <h2 id="programas-a-simular">Programas a simular</h2>
 <p>Los programas a simular deben estar en la carpeta <code>c</code>.</p>
 <p>Estos programas deben hacer uso de <code>comm.h</code> y <code>comm.c</code> para enviar mensajes a la simulación.</p>

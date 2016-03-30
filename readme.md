@@ -33,9 +33,26 @@ Resultado:
 
 El modo Python simplifica el trabajo con Processing ya que no se requiere definir tipos de variables y aporta una tipo de datos llamado diccionario o
 `dict` que es conveniente para tener asociaciones `pid: mensaje`.
-Por otro lado existe una biblioteca, [incluida en el proyecto](./cstruct.py), que permite tomar los datos enviados desde C de manera directa.
+Por otro lado existe una biblioteca, [incluida en el proyecto](./cstruct.py), que permite tomar los datos enviados desde C de manera directa desde la
+estructura TMensaje (definida en [c/comm.h](c/comm.h)).
+
+```c
+typedef struct {
+    char prog_name[20];
+    int pid;
+    int id;
+    int estado;
+    /* Información extra */
+    char msg[80];
+    int x;
+    int y;
+} TMensaje;
+
+```
 
 ## ¿Cómo se instala el modo Python en Processing?
+
+TODO
 
 ## Programas a simular
 
