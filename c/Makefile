@@ -29,7 +29,7 @@ comm.${BIN_TAIL}.o: comm.c comm.h
 	gcc $< comm.${BIN_TAIL}.o -o $@
 
 clean:
-	-rm *.o ${EJECUTABLES}
+	-rm *.o ${TARGETS}
 
 re: clean all
 
