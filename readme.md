@@ -27,7 +27,7 @@ void draw() {
 
 Resultado:
 
-![Processing](imgs/processing_ej1.png)
+![Processing](docs/imgs/processing_ej1.png)
 
 # ¿Para que sirve el modo Python?
 
