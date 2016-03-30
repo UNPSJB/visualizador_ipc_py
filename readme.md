@@ -52,7 +52,7 @@ typedef struct {
 
 ## ¿Cómo se instala el modo Python en Processing?
 
-TODO
+![Añadir modo](docs/imgs/add_mode.png)
 
 ## Programas a simular
 
