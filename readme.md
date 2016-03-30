@@ -29,6 +29,14 @@ Resultado:
 
 ![Processing](imgs/processing_ej1.png)
 
+# ¿Para que sirve el modo Python?
+
+El modo Python simplifica el trabajo con Processing ya que no se requiere definir tipos de variables y aporta una tipo de datos llamado diccionario o
+`dict` que es conveniente para tener asociaciones `pid: mensaje`.
+Por otro lado existe una biblioteca, [incluida en el proyecto](./cstruct.py), que permite tomar los datos enviados desde C de manera directa.
+
+## ¿Cómo se instala el modo Python en Processing?
+
 ## Programas a simular
 
 Los programas a simular deben estar en la carpeta `c`.
