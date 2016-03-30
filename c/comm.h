@@ -18,7 +18,6 @@ typedef struct {
     char msg[80];
     int x;
     int y;
-    int status;
 } TMensaje;
 
 
